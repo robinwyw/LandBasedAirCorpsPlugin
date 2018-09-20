@@ -1,0 +1,8 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/LandBasedAirCorpsPlugin;component/Themes/Generic.ItemProficiencyBadge.xaml"/>
+        <ResourceDictionary Source="/LandBasedAirCorpsPlugin;component/Themes/Generic.ItemLevelTag.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

@@ -1,0 +1,68 @@
+<UserControl x:Class="LandBasedAirCorpsPlugin.Views.AirFleetStateDetailIndicator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:LandBasedAirCorpsPlugin.ViewModels"
+             xmlns:kcvvm="clr-namespace:Grabacr07.KanColleViewer.ViewModels;assembly=KanColleViewer"
+             xmlns:local="clr-namespace:LandBasedAirCorpsPlugin.Views"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance vm:AirFleetViewModel}">
+
+    <ContentControl Content="{Binding QuickStateView, Mode=OneWay}">
+        <ContentControl.Resources>
+            <DataTemplate DataType="{x:Type vm:StandbyViewModel}">
+                <Border x:Name="Border"
+                        Background="#FF5A4020"
+                        Padding="8,4">
+                    <TextBlock x:Name="Text"
+                               Text="補充されていない航空機があります。"
+                               Style="{DynamicResource DefaultTextStyleKey}"
+                               Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
+                </Border>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding IsReady, Mode=OneWay}"
+                                 Value="True">
+                        <Setter TargetName="Border"
+                                Property="Background"
+                                Value="#FF286414"/>
+                        <Setter TargetName="Text"
+                                Property="Text"
+                                Value="出撃可能！"/>
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SortieViewModel}">
+                <Border x:Name="Border"
+                        Background="#FF5A2020"
+                        Padding="8,4">
+                    <TextBlock x:Name="Text"
+                               Text="出撃中！"
+                               Style="{DynamicResource DefaultTextStyleKey}"
+                               Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:DefenseViewModel}">
+                <Border x:Name="Border"
+                        Background="#FF5A542C"
+                        Padding="8,4">
+                    <TextBlock x:Name="Text"
+                               Text="防空中！"
+                               Style="{DynamicResource DefaultTextStyleKey}"
+                               Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type kcvvm:NullViewModel}">
+                <Border x:Name="Border"
+                        Background="#FF3E3E42"
+                        Padding="8,4">
+                    <TextBlock x:Name="Text"
+                               Text="航空機が未配備です。"
+                               Style="{DynamicResource DefaultTextStyleKey}"
+                               Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
+                </Border>
+            </DataTemplate>
+        </ContentControl.Resources>
+    </ContentControl>
+    
+</UserControl>

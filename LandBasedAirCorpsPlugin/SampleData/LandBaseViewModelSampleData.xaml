@@ -1,0 +1,740 @@
+<ViewModels:LandBaseViewModel xmlns:ViewModels="clr-namespace:LandBasedAirCorpsPlugin.ViewModels" 
+                              xmlns:Models="clr-namespace:LandBasedAirCorpsPlugin.Models"
+                              xmlns:Markup="clr-namespace:System.Windows.Markup;assembly=System.Xaml" 
+                              xmlns:Livet="clr-namespace:Livet;assembly=Livet" 
+                              xmlns:KanColle="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper" 
+                              xmlns:Raw="clr-namespace:Grabacr07.KanColleWrapper.Models.Raw;assembly=KanColleWrapper" 
+                              xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet">
+	<ViewModels:LandBaseViewModel.AirFleets>
+		<Markup:Array Type="{Markup:Type ViewModels:AirFleetViewModel}">
+			<ViewModels:AirFleetViewModel>
+				<ViewModels:AirFleetViewModel.MapArea>
+                    <KanColle:MapArea Id="1" 
+                                    Name="中部海域"/>
+                </ViewModels:AirFleetViewModel.MapArea>
+                <ViewModels:AirFleetViewModel.QuickStateView>
+                    <ViewModels:SortieViewModel/>
+                </ViewModels:AirFleetViewModel.QuickStateView>
+				<ViewModels:AirFleetViewModel.Regiments>
+					<Markup:Array Type="{Markup:Type ViewModels:AirRegimentViewModel}">
+						<ViewModels:AirRegimentViewModel AirSuperiority="10" 
+                                                         Behavior="Sortie" 
+                                                         Distance="5" 
+                                                         Id="1" 
+                                                         Name="第一基地航空隊">
+							<ViewModels:AirRegimentViewModel.MapArea>
+								<KanColle:MapArea Id="1" Name="中部海域"/>
+							</ViewModels:AirRegimentViewModel.MapArea>
+                            <ViewModels:AirRegimentViewModel.Squadrons>
+                                <Markup:Array Type="{Markup:Type ViewModels:SquadronViewModel}">
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="1"
+                                                             Name="九六式陸攻"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="8">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="1"
+                                                                       LevelText="">
+                                                        <KanColle:SlotItem.Info>
+                                                            <KanColle:SlotItemInfo IconType="LandBasedAttacker"/>
+                                                        </KanColle:SlotItem.Info>
+                                                    </KanColle:SlotItem>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="2"
+                                                             Name="一式陸攻"
+                                                             State="Deployed"
+                                                             WorkingCount="10"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="2"
+                                                                       LevelText="">
+                                                        <KanColle:SlotItem.Info>
+                                                            <KanColle:SlotItemInfo IconType="LandBasedAttacker"/>
+                                                        </KanColle:SlotItem.Info>
+                                                    </KanColle:SlotItem>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="3"
+                                                             Name="一式陸攻"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="3"
+                                                                       LevelText="★+4">
+                                                        <KanColle:SlotItem.Info>
+                                                            <KanColle:SlotItemInfo IconType="LandBasedAttacker"/>
+                                                        </KanColle:SlotItem.Info>
+                                                    </KanColle:SlotItem>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="4"
+                                                             Name="爆装一式戦 隼III型改(65戦隊)"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="5">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="4"
+                                                                       LevelText="★max"/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                </Markup:Array>
+                            </ViewModels:AirRegimentViewModel.Squadrons>
+						</ViewModels:AirRegimentViewModel>
+                        <ViewModels:AirRegimentViewModel AirSuperiority="10" 
+                                                         Behavior="Defense" 
+                                                         Distance="2" 
+                                                         Id="1" 
+                                                         Name="第二基地航空隊">
+                            <ViewModels:AirRegimentViewModel.MapArea>
+                                <KanColle:MapArea Id="1" Name="中部海域"/>
+                            </ViewModels:AirRegimentViewModel.MapArea>
+                            <ViewModels:AirRegimentViewModel.Squadrons>
+                                <Markup:Array Type="{Markup:Type ViewModels:SquadronViewModel}">
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="1"
+                                                             Name="雷電"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="2">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="5"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="2"
+                                                             Name="雷電"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="2">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="6"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="3"
+                                                             Name="紫電一一型"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="3">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="4"
+                                                             Name="Spitfire Mk.I"
+                                                             State="Relocating"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="4">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="0"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                </Markup:Array>
+                            </ViewModels:AirRegimentViewModel.Squadrons>
+                        </ViewModels:AirRegimentViewModel>
+                        <ViewModels:AirRegimentViewModel AirSuperiority="10" 
+                                                         Behavior="Standby" 
+                                                         Distance="5" 
+                                                         Id="1" 
+                                                         Name="第三基地航空隊">
+                            <ViewModels:AirRegimentViewModel.MapArea>
+                                <KanColle:MapArea Id="1" Name="中部海域"/>
+                            </ViewModels:AirRegimentViewModel.MapArea>
+                            <ViewModels:AirRegimentViewModel.Squadrons>
+                                <Markup:Array Type="{Markup:Type ViewModels:SquadronViewModel}">
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="1"
+                                                             Name="二式大艇"
+                                                             State="Deployed"
+                                                             WorkingCount="4"
+                                                             DeploymentCount="4"
+                                                             Distance="20">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="2"
+                                                             Name="銀河"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="3"
+                                                             Name="銀河"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="4"
+                                                             Name="深海陸上攻撃機"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="0"
+                                                                       LevelText="★+999"/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                </Markup:Array>
+                            </ViewModels:AirRegimentViewModel.Squadrons>
+                        </ViewModels:AirRegimentViewModel>
+                    </Markup:Array>
+				</ViewModels:AirFleetViewModel.Regiments>
+			</ViewModels:AirFleetViewModel>
+            <ViewModels:AirFleetViewModel>
+                <ViewModels:AirFleetViewModel.MapArea>
+                    <KanColle:MapArea Id="10000" 
+                                    Name="期間限定海域"/>
+                </ViewModels:AirFleetViewModel.MapArea>
+                <ViewModels:AirFleetViewModel.Regiments>
+                    <Markup:Array Type="{Markup:Type ViewModels:AirRegimentViewModel}">
+                        <ViewModels:AirRegimentViewModel AirSuperiority="10" 
+                                                         Behavior="Sortie" 
+                                                         Distance="5" 
+                                                         Id="1" 
+                                                         Name="第一基地航空隊">
+                            <ViewModels:AirRegimentViewModel.MapArea>
+                                <KanColle:MapArea Id="1" Name="中部海域"/>
+                            </ViewModels:AirRegimentViewModel.MapArea>
+                            <ViewModels:AirRegimentViewModel.Squadrons>
+                                <Markup:Array Type="{Markup:Type ViewModels:SquadronViewModel}">
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="1"
+                                                             Name="九六式陸攻"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="8">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="1"
+                                                                       LevelText="">
+                                                        <KanColle:SlotItem.Info>
+                                                            <KanColle:SlotItemInfo IconType="LandBasedAttacker"/>
+                                                        </KanColle:SlotItem.Info>
+                                                    </KanColle:SlotItem>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="2"
+                                                             Name="一式陸攻"
+                                                             State="Deployed"
+                                                             WorkingCount="10"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="2"
+                                                                       LevelText="">
+                                                        <KanColle:SlotItem.Info>
+                                                            <KanColle:SlotItemInfo IconType="LandBasedAttacker"/>
+                                                        </KanColle:SlotItem.Info>
+                                                    </KanColle:SlotItem>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="3"
+                                                             Name="一式陸攻"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="3"
+                                                                       LevelText="★+4">
+                                                        <KanColle:SlotItem.Info>
+                                                            <KanColle:SlotItemInfo IconType="LandBasedAttacker"/>
+                                                        </KanColle:SlotItem.Info>
+                                                    </KanColle:SlotItem>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="4"
+                                                             Name="爆装一式戦 隼III型改(65戦隊)"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="5">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="4"
+                                                                       LevelText="★max"/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                </Markup:Array>
+                            </ViewModels:AirRegimentViewModel.Squadrons>
+                        </ViewModels:AirRegimentViewModel>
+                        <ViewModels:AirRegimentViewModel AirSuperiority="10" 
+                                                         Behavior="Defense" 
+                                                         Distance="2" 
+                                                         Id="1" 
+                                                         Name="第二基地航空隊">
+                            <ViewModels:AirRegimentViewModel.MapArea>
+                                <KanColle:MapArea Id="1" Name="中部海域"/>
+                            </ViewModels:AirRegimentViewModel.MapArea>
+                            <ViewModels:AirRegimentViewModel.Squadrons>
+                                <Markup:Array Type="{Markup:Type ViewModels:SquadronViewModel}">
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="1"
+                                                             Name="雷電"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="2">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="5"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="2"
+                                                             Name="雷電"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="2">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="6"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="3"
+                                                             Name="紫電一一型"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="3">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="4"
+                                                             Name="Spitfire Mk.I"
+                                                             State="Relocating"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="4">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="0"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                </Markup:Array>
+                            </ViewModels:AirRegimentViewModel.Squadrons>
+                        </ViewModels:AirRegimentViewModel>
+                        <ViewModels:AirRegimentViewModel AirSuperiority="10" 
+                                                         Behavior="Standby" 
+                                                         Distance="5" 
+                                                         Id="1" 
+                                                         Name="第三基地航空隊">
+                            <ViewModels:AirRegimentViewModel.MapArea>
+                                <KanColle:MapArea Id="1" Name="中部海域"/>
+                            </ViewModels:AirRegimentViewModel.MapArea>
+                            <ViewModels:AirRegimentViewModel.Squadrons>
+                                <Markup:Array Type="{Markup:Type ViewModels:SquadronViewModel}">
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="1"
+                                                             Name="二式大艇"
+                                                             State="Deployed"
+                                                             WorkingCount="4"
+                                                             DeploymentCount="4"
+                                                             Distance="20">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="2"
+                                                             Name="銀河"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="3"
+                                                             Name="銀河"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                    <ViewModels:SquadronViewModel >
+                                        <ViewModels:SquadronViewModel.Squadron>
+                                            <Models:Squadron Id="4"
+                                                             Name="深海陸上攻撃機"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                                <Models:Squadron.Plane>
+                                                    <KanColle:SlotItem Proficiency="0"
+                                                                       LevelText="★+999"/>
+                                                </Models:Squadron.Plane>
+                                            </Models:Squadron>
+                                        </ViewModels:SquadronViewModel.Squadron>
+                                    </ViewModels:SquadronViewModel>
+                                </Markup:Array>
+                            </ViewModels:AirRegimentViewModel.Squadrons>
+                        </ViewModels:AirRegimentViewModel>
+                    </Markup:Array>
+                </ViewModels:AirFleetViewModel.Regiments>
+            </ViewModels:AirFleetViewModel>
+        </Markup:Array>
+	</ViewModels:LandBaseViewModel.AirFleets>
+	<ViewModels:LandBaseViewModel.SelectedFleet>
+        <ViewModels:AirFleetViewModel>
+            <ViewModels:AirFleetViewModel.MapArea>
+                <KanColle:MapArea Id="1" 
+                                    Name="中部海域"/>
+            </ViewModels:AirFleetViewModel.MapArea>
+            <ViewModels:AirFleetViewModel.Regiments>
+                <Markup:Array Type="{Markup:Type ViewModels:AirRegimentViewModel}">
+                    <ViewModels:AirRegimentViewModel AirSuperiority="10" 
+                                                         Behavior="Sortie" 
+                                                         Distance="5" 
+                                                         Id="1" 
+                                                         Name="第一基地航空隊">
+                        <ViewModels:AirRegimentViewModel.MapArea>
+                            <KanColle:MapArea Id="1" Name="中部海域"/>
+                        </ViewModels:AirRegimentViewModel.MapArea>
+                        <ViewModels:AirRegimentViewModel.Squadrons>
+                            <Markup:Array Type="{Markup:Type ViewModels:SquadronViewModel}">
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="1"
+                                                             Name="九六式陸攻"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="8">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="1"
+                                                                       LevelText="">
+                                                    <KanColle:SlotItem.Info>
+                                                        <KanColle:SlotItemInfo IconType="LandBasedAttacker"/>
+                                                    </KanColle:SlotItem.Info>
+                                                </KanColle:SlotItem>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="2"
+                                                             Name="一式陸攻"
+                                                             State="Deployed"
+                                                             WorkingCount="10"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="2"
+                                                                       LevelText="">
+                                                    <KanColle:SlotItem.Info>
+                                                        <KanColle:SlotItemInfo IconType="LandBasedAttacker"/>
+                                                    </KanColle:SlotItem.Info>
+                                                </KanColle:SlotItem>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="3"
+                                                             Name="一式陸攻"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="3"
+                                                                       LevelText="★+4">
+                                                    <KanColle:SlotItem.Info>
+                                                        <KanColle:SlotItemInfo IconType="LandBasedAttacker"/>
+                                                    </KanColle:SlotItem.Info>
+                                                </KanColle:SlotItem>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="4"
+                                                             Name="爆装一式戦 隼III型改(65戦隊)"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="5">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="4"
+                                                                       LevelText="★max"/>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                            </Markup:Array>
+                        </ViewModels:AirRegimentViewModel.Squadrons>
+                    </ViewModels:AirRegimentViewModel>
+                    <ViewModels:AirRegimentViewModel AirSuperiority="10" 
+                                                         Behavior="Defense" 
+                                                         Distance="2" 
+                                                         Id="1" 
+                                                         Name="第二基地航空隊">
+                        <ViewModels:AirRegimentViewModel.MapArea>
+                            <KanColle:MapArea Id="1" Name="中部海域"/>
+                        </ViewModels:AirRegimentViewModel.MapArea>
+                        <ViewModels:AirRegimentViewModel.Squadrons>
+                            <Markup:Array Type="{Markup:Type ViewModels:SquadronViewModel}">
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="1"
+                                                             Name="雷電"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="2">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="5"
+                                                                       LevelText=""/>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="2"
+                                                             Name="雷電"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="2">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="6"
+                                                                       LevelText=""/>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="3"
+                                                             Name="紫電一一型"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="3">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="4"
+                                                             Name="Spitfire Mk.I"
+                                                             State="Relocating"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="4">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="0"
+                                                                       LevelText=""/>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                            </Markup:Array>
+                        </ViewModels:AirRegimentViewModel.Squadrons>
+                    </ViewModels:AirRegimentViewModel>
+                    <ViewModels:AirRegimentViewModel AirSuperiority="10" 
+                                                         Behavior="Standby" 
+                                                         Distance="12" 
+                                                         Id="1" 
+                                                         Name="第三基地航空隊">
+                        <ViewModels:AirRegimentViewModel.MapArea>
+                            <KanColle:MapArea Id="1" Name="中部海域"/>
+                        </ViewModels:AirRegimentViewModel.MapArea>
+                        <ViewModels:AirRegimentViewModel.Squadrons>
+                            <Markup:Array Type="{Markup:Type ViewModels:SquadronViewModel}">
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="1"
+                                                             Name="二式大艇"
+                                                             State="Deployed"
+                                                             WorkingCount="4"
+                                                             DeploymentCount="4"
+                                                             Distance="20">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="2"
+                                                             Name="銀河"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="3"
+                                                             Name="銀河"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="7"
+                                                                       LevelText=""/>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                                <ViewModels:SquadronViewModel >
+                                    <ViewModels:SquadronViewModel.Squadron>
+                                        <Models:Squadron Id="4"
+                                                             Name="深海陸上攻撃機"
+                                                             State="Deployed"
+                                                             WorkingCount="18"
+                                                             DeploymentCount="18"
+                                                             Distance="9">
+                                            <Models:Squadron.Plane>
+                                                <KanColle:SlotItem Proficiency="0"
+                                                                       LevelText="★+999"/>
+                                            </Models:Squadron.Plane>
+                                        </Models:Squadron>
+                                    </ViewModels:SquadronViewModel.Squadron>
+                                </ViewModels:SquadronViewModel>
+                            </Markup:Array>
+                        </ViewModels:AirRegimentViewModel.Squadrons>
+                    </ViewModels:AirRegimentViewModel>
+                </Markup:Array>
+            </ViewModels:AirFleetViewModel.Regiments>
+        </ViewModels:AirFleetViewModel>
+    </ViewModels:LandBaseViewModel.SelectedFleet>
+</ViewModels:LandBaseViewModel>
