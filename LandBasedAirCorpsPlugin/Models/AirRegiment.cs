@@ -102,7 +102,7 @@ namespace LandBasedAirCorpsPlugin.Models
         public AirRegiment(kcsapi_air_base raw) : base(raw)
         {
             this.Name = raw.api_name;
-            this.Distance = raw.api_distance;
+            this.Distance = raw.api_distance.api_base + raw.api_distance.api_bonus;
             this.Behavior = (AirRegimentBehavior)raw.api_action_kind;
             this.Squadrons = raw.api_plane_info.Select(x => new Squadron(x)).ToArray();
         }

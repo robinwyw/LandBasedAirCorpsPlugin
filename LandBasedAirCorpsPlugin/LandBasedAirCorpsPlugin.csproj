@@ -127,6 +127,7 @@
     <Compile Include="Controls\ItemProficiencyBadge.cs" />
     <Compile Include="Models\AirFleet.cs" />
     <Compile Include="Models\Calculator.cs" />
+    <Compile Include="Models\Raw\kcsapi_distance.cs" />
     <Compile Include="Models\Situations.cs" />
     <Compile Include="ViewModels\AirFleetViewModel.cs" />
     <Compile Include="ViewModels\AirRegimentViewModel.cs" />
