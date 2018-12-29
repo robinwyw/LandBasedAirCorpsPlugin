@@ -155,7 +155,7 @@ namespace LandBasedAirCorpsPlugin.Models
                     regiment.SetPlanes(raw.api_plane_info);
                 }
 
-                regiment.Distance = raw.api_distance;
+                regiment.Distance = raw.api_distance.api_base + raw.api_distance.api_bonus;
                 fleet.UpdateFleetState();
             }
             catch (Exception ex)
