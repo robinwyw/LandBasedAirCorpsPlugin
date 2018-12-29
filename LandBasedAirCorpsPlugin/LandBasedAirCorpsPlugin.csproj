@@ -191,7 +191,8 @@
     </DesignData>
     <Page Include="Themes\Generic.ItemLevelTag.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
     </Page>
     <Page Include="Themes\Generic.ItemProficiencyBadge.xaml">
       <Generator>MSBuild:Compile</Generator>

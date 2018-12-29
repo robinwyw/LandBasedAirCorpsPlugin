@@ -69,6 +69,8 @@ namespace LandBasedAirCorpsPlugin.Models
             if (source == null) throw new ArgumentNullException(nameof(source));
 
             return source.Any(x => x.Plane.Info.Type == SlotItemType.艦上偵察機) ? source.Aggregate((x, y) => x.Plane.Info.ViewRange > y.Plane.Info.ViewRange ? x : y)
+                 //陸上偵察機
+                 : source.Any(x => x.Plane.Info.Type == (SlotItemType)49) ? source.Aggregate((x, y) => x.Plane.Info.ViewRange > y.Plane.Info.ViewRange ? x : y)
                  : source.Any(x => x.Plane.Info.Type == SlotItemType.大型飛行艇 ||
                                    x.Plane.Info.Type == SlotItemType.水上偵察機) ? source.Aggregate((x, y) => x.Plane.Info.ViewRange > y.Plane.Info.ViewRange ? x : y)
                  : null;
@@ -83,10 +85,17 @@ namespace LandBasedAirCorpsPlugin.Models
             {
                 return info.ViewRange <= 7 ? 1.2 : 1.3;
             }
-
-            return info.ViewRange <= 7 ? 1.1
+            else if(info.Type == SlotItemType.大型飛行艇 || info.Type == SlotItemType.水上偵察機)
+            {
+                return info.ViewRange <= 7 ? 1.1
                  : info.ViewRange == 8 ? 1.13
                  : 1.16;
+            }
+            else
+            {
+                return 1.18;
+            }
+            
         }
     }
 }
