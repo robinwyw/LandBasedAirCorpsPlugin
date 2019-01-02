@@ -1,6 +1,0 @@
-[submodule "KanColleViewer"]
-	path = KanColleViewer
-	url = https://github.com/Grabacr07/KanColleViewer.git
-[submodule "MetroRadiance"]
-	path = MetroRadiance
-	url = https://github.com/Grabacr07/MetroRadiance.git
