@@ -128,11 +128,18 @@
     <Compile Include="Models\AirFleet.cs" />
     <Compile Include="Models\Calculator.cs" />
     <Compile Include="Models\Raw\kcsapi_distance.cs" />
+    <Compile Include="Models\RelocatingCompletedEventArgs.cs" />
+    <Compile Include="Models\RelocatingSquadron.cs" />
+    <Compile Include="Models\Settings\PluginSettings.cs" />
+    <Compile Include="Models\Settings\Provider.cs" />
     <Compile Include="Models\Situations.cs" />
+    <Compile Include="Notifer.cs" />
     <Compile Include="ViewModels\AirFleetViewModel.cs" />
     <Compile Include="ViewModels\AirRegimentViewModel.cs" />
     <Compile Include="ViewModels\LandBaseViewModel.cs" />
     <Compile Include="ViewModels\QuickStateViewModels.cs" />
+    <Compile Include="ViewModels\RelocatingSquadronsWindowViewModel.cs" />
+    <Compile Include="ViewModels\RelocatingSquadronViewModel.cs" />
     <Compile Include="ViewModels\SquadronViewModel.cs" />
     <Compile Include="Annotations\DarkAttribute.cs" />
     <Compile Include="Annotations\ElementalAttribute.cs" />
@@ -151,6 +158,12 @@
     </Compile>
     <Compile Include="Views\AirFleetStateIconIndicator.xaml.cs">
       <DependentUpon>AirFleetStateIconIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RelocatingSquadronsWindow.xaml.cs">
+      <DependentUpon>RelocatingSquadronsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ToolView.xaml.cs">
       <DependentUpon>ToolView.xaml</DependentUpon>
@@ -208,6 +221,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AirFleetStateIconIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RelocatingSquadronsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -107,20 +107,33 @@ namespace LandBasedAirCorpsPlugin.Models
             this.Squadrons = raw.api_plane_info.Select(x => new Squadron(x)).ToArray();
         }
 
-        internal void SetPlanes(kcsapi_plane_info[] planes)
+        internal RelocatingSquadron SetOrReplaceSquadron(kcsapi_plane_info plane)
         {
-            foreach (var item in planes)
+            var i = plane.api_squadron_id - 1;
+            var current = this.Squadrons[i];
+
+            this.Squadrons[i] = new Squadron(plane);
+            this.RaiseSquadronsUpdated();
+
+            return current.State == SquadronState.Deployed ? new RelocatingSquadron(current, null) : null;
+        }
+        
+        internal void ExchangeSquadrons(kcsapi_plane_info[] planes)
+        {
+            foreach (var plane in planes)
             {
-                this.Squadrons[item.api_squadron_id - 1] = new Squadron(item);
+                this.Squadrons[plane.api_squadron_id - 1] = new Squadron(plane);
             }
 
             this.RaiseSquadronsUpdated();
         }
 
-        internal void UnsetPlane(int id, SquadronState state)
+        internal RelocatingSquadron UnsetSquadron(int id, SquadronState state)
         {
             this.Squadrons[id - 1].State = state;
             this.RaiseSquadronsUpdated();
+
+            return new RelocatingSquadron(this.Squadrons[id - 1], this);
         }
 
         internal void Supply(string[] squadronId)

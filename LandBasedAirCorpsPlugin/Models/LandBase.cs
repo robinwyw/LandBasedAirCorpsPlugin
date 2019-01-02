@@ -7,6 +7,7 @@ using System.Reactive.Linq;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using LandBasedAirCorpsPlugin.Models.Settings;
 using LandBasedAirCorpsPlugin.Models.Raw;
 using Livet;
 
@@ -14,6 +15,8 @@ namespace LandBasedAirCorpsPlugin.Models
 {
     public class LandBase : NotificationObject
     {
+        private Notifier notifier;
+
         #region AirFleets変更通知プロパティ
         private MemberTable<AirFleet> _AirFleets;
 
@@ -30,8 +33,30 @@ namespace LandBasedAirCorpsPlugin.Models
         }
         #endregion
 
-        public LandBase()
+        #region RelocatingSquadrons 変更通知プロパティ
+
+        private ObservableSynchronizedCollection<RelocatingSquadron> _RelocatingSquadrons;
+
+        public ObservableSynchronizedCollection<RelocatingSquadron> RelocatingSquadrons
         {
+            get
+            { return this._RelocatingSquadrons; }
+            set
+            { 
+                if (this._RelocatingSquadrons == value)
+                    return;
+                this._RelocatingSquadrons = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        public LandBase(Notifier notifier)
+        {
+            this.notifier = notifier;
+            this.RelocatingSquadrons = new ObservableSynchronizedCollection<RelocatingSquadron>();
+
             var proxy = KanColleClient.Current.Proxy;
 
             proxy.ApiSessionSource
@@ -148,19 +173,55 @@ namespace LandBasedAirCorpsPlugin.Models
                 if (int.Parse(data.Request["api_item_id"]) == -1)
                 {
                     var info = raw.api_plane_info[0];
-                    regiment.UnsetPlane(info.api_squadron_id, (SquadronState)info.api_state);
+                    var prev = regiment.UnsetSquadron(info.api_squadron_id, (SquadronState)info.api_state);
+
+                    this.RelocateSquadron(prev);
+                }
+                else if (raw.api_plane_info.Length == 1)
+                {
+                    var info = raw.api_plane_info[0];
+                    var prev = regiment.SetOrReplaceSquadron(info);
+
+                    if (prev != null)
+                        this.RelocateSquadron(prev);
                 }
                 else
                 {
-                    regiment.SetPlanes(raw.api_plane_info);
+                    regiment.ExchangeSquadrons(raw.api_plane_info);
                 }
 
                 regiment.Distance = raw.api_distance.api_base + raw.api_distance.api_bonus;
+
                 fleet.UpdateFleetState();
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"基地航空隊の航空機の変更に失敗しました。\n{ex}");
+            }
+        }
+
+        private void RelocateSquadron(RelocatingSquadron squadron)
+        {
+            squadron.Completed += Handler;
+
+            this.RelocatingSquadrons.Add(squadron);
+
+            void Handler(object sender, RelocatingCompletedEventArgs e)
+            {
+                if (PluginSettings.NotifyRelocatingCompleted)
+                {
+                    var message = e.RegimentName == null
+                        ? string.Format(Properties.Resources.RelocatingCompletedMessage, e.SlotItemName)
+                        : string.Format(Properties.Resources.RelocatingCompleteMessageWithRegimentName, e.MapAreaName, e.RegimentName, e.SlotItemName);
+
+                    this.notifier.Notify(
+                        Notifier.Types.RelocatingComplete,
+                        "配置転換完了",
+                        message);
+                }
+
+                this.RelocatingSquadrons.Remove(squadron);
+                squadron.Completed -= Handler;
             }
         }
 
