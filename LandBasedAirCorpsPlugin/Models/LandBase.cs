@@ -105,10 +105,17 @@ namespace LandBasedAirCorpsPlugin.Models
             try
             {
                 var fleet = this.AirFleets[int.Parse(data.Request["api_area_id"])];
-                var regiment = fleet.Regiments[int.Parse(data.Request["api_base_id"])];
-                var behavior = (AirRegimentBehavior)int.Parse(data.Request["api_action_kind"]);
+                var regiments = data.Request["api_base_id"].Split(',');
+                var behaviors = data.Request["api_action_kind"].Split(',');
 
-                regiment.Behavior = behavior;
+                for (int i = 0; i < regiments.Length; i++)
+                {
+                    var regiment = fleet.Regiments[int.Parse(regiments[i])];
+                    var behavior = (AirRegimentBehavior)int.Parse(behaviors[i]);
+
+                    regiment.Behavior = behavior;
+                }
+
                 fleet.UpdateFleetState();
             }
             catch (Exception ex)
