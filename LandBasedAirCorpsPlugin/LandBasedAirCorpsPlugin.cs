@@ -18,7 +18,7 @@ namespace LandBasedAirCorpsPlugin
     [Export(typeof(ITool))]
     [ExportMetadata("Title", "LandBasedAirCorpsPlugin")]
     [ExportMetadata("Description", "基地航空隊の情報を表示します。")]
-    [ExportMetadata("Version", "1.0.1")]
+    [ExportMetadata("Version", "1.0.2")]
     [ExportMetadata("Author", "@ame225")]
     [ExportMetadata("Guid", "E7B62940-0702-4369-898F-BC177042514D")]
     public class LandBasedAirCorpsPlugin : IPlugin, ITool
