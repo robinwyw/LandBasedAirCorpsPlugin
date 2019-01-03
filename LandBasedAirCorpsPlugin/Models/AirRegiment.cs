@@ -14,7 +14,7 @@ namespace LandBasedAirCorpsPlugin.Models
     {
         public int Id => this.RawData.api_rid;
 
-        public MapArea MapArea => KanColleClient.Current.Master.MapAreas[this.RawData.api_area_id];
+        public MapArea MapArea { get; }
 
         #region Name変更通知プロパティ
         private string _Name;
@@ -105,6 +105,7 @@ namespace LandBasedAirCorpsPlugin.Models
             this.Distance = raw.api_distance.api_base + raw.api_distance.api_bonus;
             this.Behavior = (AirRegimentBehavior)raw.api_action_kind;
             this.Squadrons = raw.api_plane_info.Select(x => new Squadron(x)).ToArray();
+            this.MapArea = KanColleClient.Current.Master.MapAreas[raw.api_area_id];
         }
 
         internal RelocatingSquadron SetOrReplaceSquadron(kcsapi_plane_info plane)

@@ -15,9 +15,9 @@ namespace LandBasedAirCorpsPlugin.ViewModels
 
         public Squadron Squadron => this.source.Squadron;
 
-        public string RegimentName => this.source.RegimentName;
+        public string RegimentName => this.source.RegimentName ?? "未所属";
 
-        public string MapAreaName => this.source.MapAreaName;
+        public string MapAreaName => this.source.MapAreaName ?? "なし";
 
         public string Remaining => this.source.Remaining.HasValue
             ? this.source.Remaining.Value.ToString(@"mm\:ss")

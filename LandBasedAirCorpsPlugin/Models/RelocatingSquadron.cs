@@ -106,14 +106,14 @@ namespace LandBasedAirCorpsPlugin.Models
         public RelocatingSquadron(Squadron squadron, AirRegiment regiment)
         {
             this.Squadron = squadron;
-            this.RegimentName = regiment != null ? regiment.Name : "未所属";
-            this.MapAreaName = regiment != null 
-                ? regiment.MapArea.Id <= 7
-                    ? regiment.MapArea.Name
-                    : "期間限定海域"
-                :"なし";
             this.Remaining = TimeSpan.FromMinutes(duration);
             this.CompleteTime = DateTime.Now + this.Remaining.Value;
+
+            if (regiment != null)
+            {
+                this.RegimentName = regiment.Name;
+                this.MapAreaName = regiment.MapArea.Id <= 7 ? regiment.MapArea.Name : "期間限定海域";
+            }
         }
 
         protected override void Tick()
