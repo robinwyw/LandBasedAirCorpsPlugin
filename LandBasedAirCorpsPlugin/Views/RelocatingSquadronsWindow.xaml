@@ -12,7 +12,7 @@
                    mc:Ignorable="d"
                    Title="{Binding Title}" 
                    Height="300"
-                   Width="650"
+                   Width="710"
                    Background="{DynamicResource ThemeBrushKey}"
                    Foreground="{DynamicResource ActiveForegroundBrushKey}"
                    FontFamily="{DynamicResource DefaultFontFamilyKey}"
@@ -23,7 +23,7 @@
                    metro:ThemeHelper.HasThemeResources="True"
                    d:DataContext="{d:DesignInstance vm:RelocatingSquadronsWindowViewModel}">
 
-    <Window.Resources>
+    <metro:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Colors.xaml" />
@@ -51,7 +51,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         
-    </Window.Resources>
+    </metro:MetroWindow.Resources>
 
     <i:Interaction.Triggers>
 
@@ -112,7 +112,7 @@
                     <ListView.View>
                         <GridView>
                             
-                            <GridViewColumn Width="240">
+                            <GridViewColumn Width="200">
                                 <GridViewColumn.Header>
                                     <TextBlock Text="機体名"
                                                Padding="4"
@@ -127,16 +127,42 @@
                                             <TextBlock Text="{Binding Squadron.Name, Mode=OneWay}"
                                                        Foreground="{DynamicResource ActiveForegroundBrushKey}"
                                                        Margin="5,4,5,4"/>
-                                            <Viewbox Width="16">
-                                                <controls:ItemProficiencyBadge Proficiency="{Binding Squadron.Plane.Proficiency, Mode=OneWay}"/>
-                                            </Viewbox>
-                                            <TextBlock Text="{Binding Squadron.Plane.LevelText, Mode=OneWay}"
-                                                       Margin="5,0,0,0"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            
+
+                            <GridViewColumn Width="27">
+                                <GridViewColumn.Header>
+                                    <TextBlock Text=""
+                                               Padding="4"
+                                               Style="{DynamicResource DefaultTextStyleKey}"/>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate DataType="{x:Type vm:RelocatingSquadronViewModel}">
+                                        <Viewbox Width="16">
+                                            <controls:ItemProficiencyBadge Proficiency="{Binding Squadron.Plane.Proficiency, Mode=OneWay}"
+                                                                           IsBackgroundTransparent="True"
+                                                                           Margin="0,-1,0,0"/>
+                                        </Viewbox>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="55">
+                                <GridViewColumn.Header>
+                                    <TextBlock Text=""
+                                               Padding="4"
+                                               Style="{DynamicResource DefaultTextStyleKey}"/>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate DataType="{x:Type vm:RelocatingSquadronViewModel}">
+                                        <TextBlock Text="{Binding Squadron.Plane.LevelText, Mode=OneWay}"
+                                                       Margin="0,4,0,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
                             <GridViewColumn Width="110">
                                 <GridViewColumn.Header>
                                     <TextBlock Text="完了時刻"
@@ -165,7 +191,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Width="90">
+                            <GridViewColumn Width="85">
                                 <GridViewColumn.Header>
                                     <TextBlock Text="海域"
                                                Padding="4"
