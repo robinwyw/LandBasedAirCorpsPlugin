@@ -16,31 +16,33 @@ namespace LandBasedAirCorpsPlugin
 {
     [Export(typeof(IPlugin))]
     [Export(typeof(ITool))]
+    [Export(typeof(ISettings))]
+    [Export(typeof(IRequestNotify))]
     [ExportMetadata("Title", "LandBasedAirCorpsPlugin")]
     [ExportMetadata("Description", "基地航空隊の情報を表示します。")]
-    [ExportMetadata("Version", "1.0.2")]
+    [ExportMetadata("Version", "1.1")]
     [ExportMetadata("Author", "@ame225")]
     [ExportMetadata("Guid", "E7B62940-0702-4369-898F-BC177042514D")]
-    public class LandBasedAirCorpsPlugin : IPlugin, ITool
+    public class LandBasedAirCorpsPlugin : IPlugin, ITool, ISettings, IRequestNotify
     {
-        private readonly SerialDisposable toolviewDisposer = new SerialDisposable();
+        private readonly SerialDisposable toolviewDisposable = new SerialDisposable();
+
         private LandBaseViewModel vm;
+
+        public event EventHandler<NotifyEventArgs> NotifyRequested;
 
         public void Initialize()
         {
-            this.vm = new LandBaseViewModel(new LandBase());
+            var notifier = new Notifier(this);
+            this.vm = new LandBaseViewModel(new LandBase(notifier));
         }
 
-        private T RegisterResources<T>(T view, SerialDisposable disposable) where T : FrameworkElement
-        {
-            var unregister = ThemeService.Current.Register(view.Resources);
-            disposable.Disposable = unregister;
-
-            return view;
-        }
+        internal void InvokeNotifyRequested(NotifyEventArgs e) => this.NotifyRequested?.Invoke(this, e);
 
         string ITool.Name => "LandBase";
 
-        object ITool.View => this.RegisterResources(new ToolView() { DataContext = this.vm }, this.toolviewDisposer);
+        object ITool.View => new ToolView() { DataContext = this.vm };
+
+        object ISettings.View => new SettingsView() { DataContext = this.vm };
     }
 }

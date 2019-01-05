@@ -28,12 +28,19 @@ namespace LandBasedAirCorpsPlugin.ViewModels
 
         public bool IsReady => this.source.IsReady;
 
+        public bool IsRelocating => this.source.State.HasFlag(AirFleetSituation.Relocating);
+
         public StandbyViewModel(AirFleet source)
         {
             this.source = source;
             this.CompositeDisposable.Add(new Livet.EventListeners.PropertyChangedEventListener(this.source)
             {
-                { nameof(AirFleet.IsReady), (_, __) => this.RaisePropertyChanged(nameof(this.IsReady)) }
+                { nameof(AirFleet.State), (_, __) =>
+                    {
+                        this.RaisePropertyChanged(nameof(this.IsReady));
+                        this.RaisePropertyChanged(nameof(this.IsRelocating));
+                    }
+                }
             });
         }
     }

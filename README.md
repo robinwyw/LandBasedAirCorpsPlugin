@@ -7,7 +7,12 @@ KanColleViewer で基地航空隊の情報を表示するプラグインです。
 * `LandBasedAirCorpsPlugin.dll` を KanColleViewer の `Plugins` ディレクトリへ移動。
 
 ### ライセンス
+#### LandBasedAirCorpsPlugin
 * [The MIT License (MIT)](LICENSE)
+
+#### KanColleViewer
+#### KanColleWrapper
+* [The MIT License (MIT)](licenses/KanColleViewer.txt)
 
 ### 使用ライブラリ
 

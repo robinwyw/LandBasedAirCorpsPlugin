@@ -52,11 +52,22 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="KanColleViewer, Version=4.5.1.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DependentAssemblies\KanColleViewer.exe</HintPath>
+    </Reference>
     <Reference Include="KanColleViewer.Composition, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\KanColleViewer.Composition.1.4.0\lib\net45\KanColleViewer.Composition.dll</HintPath>
     </Reference>
+    <Reference Include="KanColleViewer.Controls, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\KanColleViewer.Controls.1.3.2\lib\net46\KanColleViewer.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="KanColleViewer.PluginAnalyzer, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\KanColleViewer.PluginAnalyzer.1.1.1.0\lib\net46\KanColleViewer.PluginAnalyzer.dll</HintPath>
+    </Reference>
+    <Reference Include="KanColleWrapper, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DependentAssemblies\KanColleWrapper.dll</HintPath>
     </Reference>
     <Reference Include="Livet, Version=1.3.0.0, Culture=neutral, PublicKeyToken=b0b1d3f711ef38cb, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.3.1.0\lib\net45\Livet.dll</HintPath>
@@ -128,11 +139,18 @@
     <Compile Include="Models\AirFleet.cs" />
     <Compile Include="Models\Calculator.cs" />
     <Compile Include="Models\Raw\kcsapi_distance.cs" />
+    <Compile Include="Models\RelocatingCompletedEventArgs.cs" />
+    <Compile Include="Models\RelocatingSquadron.cs" />
+    <Compile Include="Models\Settings\PluginSettings.cs" />
+    <Compile Include="Models\Settings\Provider.cs" />
     <Compile Include="Models\Situations.cs" />
+    <Compile Include="Notifer.cs" />
     <Compile Include="ViewModels\AirFleetViewModel.cs" />
     <Compile Include="ViewModels\AirRegimentViewModel.cs" />
     <Compile Include="ViewModels\LandBaseViewModel.cs" />
     <Compile Include="ViewModels\QuickStateViewModels.cs" />
+    <Compile Include="ViewModels\RelocatingSquadronsWindowViewModel.cs" />
+    <Compile Include="ViewModels\RelocatingSquadronViewModel.cs" />
     <Compile Include="ViewModels\SquadronViewModel.cs" />
     <Compile Include="Annotations\DarkAttribute.cs" />
     <Compile Include="Annotations\ElementalAttribute.cs" />
@@ -151,6 +169,12 @@
     </Compile>
     <Compile Include="Views\AirFleetStateIconIndicator.xaml.cs">
       <DependentUpon>AirFleetStateIconIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RelocatingSquadronsWindow.xaml.cs">
+      <DependentUpon>RelocatingSquadronsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ToolView.xaml.cs">
       <DependentUpon>ToolView.xaml</DependentUpon>
@@ -211,24 +235,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RelocatingSquadronsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ToolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\KanColleViewer\source\Grabacr07.KanColleViewer.Controls\KanColleViewer.Controls.csproj">
-      <Project>{978239d0-3129-4c54-aac6-493f0de48bf5}</Project>
-      <Name>KanColleViewer.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KanColleViewer\source\Grabacr07.KanColleViewer\KanColleViewer.csproj">
-      <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>
-      <Name>KanColleViewer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KanColleViewer\source\Grabacr07.KanColleWrapper\KanColleWrapper.csproj">
-      <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
-      <Name>KanColleWrapper</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

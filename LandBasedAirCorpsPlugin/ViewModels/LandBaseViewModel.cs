@@ -8,6 +8,7 @@ using LandBasedAirCorpsPlugin.Models;
 using MetroTrilithon.Mvvm;
 using MetroTrilithon.Lifetime;
 using Livet;
+using Livet.Messaging;
 
 namespace LandBasedAirCorpsPlugin.ViewModels
 {
@@ -62,6 +63,13 @@ namespace LandBasedAirCorpsPlugin.ViewModels
 
                 this.AirFleets = fleets;
             }, false).AddTo(this);
+        }
+
+        public void ShowRelocatingSquadronsWindow()
+        {
+            var rsvm = new RelocatingSquadronsWindowViewModel(this.source);
+            var message = new TransitionMessage(rsvm, TransitionMode.NewOrActive, "RelocatinSquadronsWindow.Show");
+            this.Messenger.Raise(message);
         }
     }
 }
