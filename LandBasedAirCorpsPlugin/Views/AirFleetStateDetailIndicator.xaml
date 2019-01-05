@@ -30,6 +30,12 @@
                                 Property="Text"
                                 Value="出撃可能！"/>
                     </DataTrigger>
+                    <DataTrigger Binding="{Binding IsRelocating, Mode=OneWay}"
+                                 Value="True">
+                        <Setter TargetName="Text"
+                                Property="Text"
+                                Value="配置転換中の航空機があります。"/>
+                    </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:SortieViewModel}">
