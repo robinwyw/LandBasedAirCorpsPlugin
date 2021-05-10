@@ -11,26 +11,29 @@ namespace LandBasedAirCorpsPlugin.Models
     {
         private static readonly Dictionary<int, Proficiency> ProficiencyTable = new Dictionary<int, Proficiency>()
         {
-            { 0, new Proficiency(9, 0, 0) },
-            { 1, new Proficiency(24, 0, 0) },
-            { 2, new Proficiency(39, 2, 1) },
-            { 3, new Proficiency(54, 5, 1) },
-            { 4, new Proficiency(69, 9, 1) },
-            { 5, new Proficiency(84, 14, 3) },
-            { 6, new Proficiency(99, 14, 3) },
-            { 7, new Proficiency(120, 22, 6) },
+            { 0, new Proficiency(0, 9, 0, 0) },
+            { 1, new Proficiency(10, 24, 0, 0) },
+            { 2, new Proficiency(25, 39, 2, 1) },
+            { 3, new Proficiency(40, 54, 5, 1) },
+            { 4, new Proficiency(55, 69, 9, 1) },
+            { 5, new Proficiency(70, 84, 14, 3) },
+            { 6, new Proficiency(85, 99, 14, 3) },
+            { 7, new Proficiency(100, 120, 22, 6) },
         };
 
         private class Proficiency
         {
+            public int InternalMinValue { get; }
+
             public int InternalMaxValue { get; }
 
             public int FighterBonus { get; }
 
             public int SeaplaneBomberBonus { get; }
 
-            public Proficiency(int internalMax, int fighterBonus, int seaplaneBomberBonus)
+            public Proficiency(int internalMin, int internalMax, int fighterBonus, int seaplaneBomberBonus)
             {
+                this.InternalMinValue = internalMin;
                 this.InternalMaxValue = internalMax;
                 this.FighterBonus = fighterBonus;
                 this.SeaplaneBomberBonus = seaplaneBomberBonus;
@@ -40,7 +43,7 @@ namespace LandBasedAirCorpsPlugin.Models
         public static double GetBonus(this SlotItem item)
         {
             if (item == null) throw new ArgumentNullException(nameof(item));
-
+            
             var p = ProficiencyTable[item.Proficiency];
 
             switch (item.Info.Type)
@@ -48,7 +51,7 @@ namespace LandBasedAirCorpsPlugin.Models
                 case SlotItemType.艦上戦闘機:
                 case SlotItemType.水上戦闘機:
                 case SlotItemType.局地戦闘機:
-                    return Math.Sqrt(p.InternalMaxValue / 10) + p.FighterBonus;
+                    return Math.Sqrt(p.InternalMinValue / 10) + p.FighterBonus;
                 case SlotItemType.艦上爆撃機:
                 case SlotItemType.艦上攻撃機:
                 case SlotItemType.陸上攻撃機:
@@ -56,9 +59,9 @@ namespace LandBasedAirCorpsPlugin.Models
                 case SlotItemType.大型飛行艇:
                 case SlotItemType.噴式戦闘爆撃機:
                 case SlotItemType.艦上偵察機:
-                    return Math.Sqrt(p.InternalMaxValue / 10);
+                    return Math.Sqrt(p.InternalMinValue / 10);
                 case SlotItemType.水上爆撃機:
-                    return Math.Sqrt(p.InternalMaxValue / 10) + p.SeaplaneBomberBonus;
+                    return Math.Sqrt(p.InternalMinValue / 10) + p.SeaplaneBomberBonus;
                 default:
                     return 0;
             }
@@ -69,8 +72,7 @@ namespace LandBasedAirCorpsPlugin.Models
             if (source == null) throw new ArgumentNullException(nameof(source));
 
             return source.Any(x => x.Plane.Info.Type == SlotItemType.艦上偵察機) ? source.Aggregate((x, y) => x.Plane.Info.ViewRange > y.Plane.Info.ViewRange ? x : y)
-                 //陸上偵察機
-                 : source.Any(x => x.Plane.Info.Type == (SlotItemType)49) ? source.Aggregate((x, y) => x.Plane.Info.ViewRange > y.Plane.Info.ViewRange ? x : y)
+                 : source.Any(x => x.Plane.Info.Type == SlotItemType.陸上偵察機) ? source.Aggregate((x, y) => x.Plane.Info.ViewRange > y.Plane.Info.ViewRange ? x : y)
                  : source.Any(x => x.Plane.Info.Type == SlotItemType.大型飛行艇 ||
                                    x.Plane.Info.Type == SlotItemType.水上偵察機) ? source.Aggregate((x, y) => x.Plane.Info.ViewRange > y.Plane.Info.ViewRange ? x : y)
                  : null;
