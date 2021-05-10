@@ -51,8 +51,13 @@ namespace LandBasedAirCorpsPlugin.Models
                 var info = this.Plane.Info;
                 var intercept = this.IsInterceptor ? info.Evade : 0;
                 var improvementBonus = this.GetImprovementBonus(this.Plane);
+                var ex = info.Id == 138 && info.Name == "二式大艇" ?
+                            this.WorkingCount >= 4 && this.Plane.Level >= 4 ? 1 :
+                         info.Id == 312 && info.Name == "二式陸上偵察機(熟練)" ?
+                            this.WorkingCount >= 4 && this.Plane.Level >= 2 ? 1 : 0
+                         : 0 : 0;
 
-                return Math.Floor((info.AA + (1.5 * intercept) + improvementBonus) * Math.Sqrt(this.WorkingCount) + this.Plane.GetBonus());
+                return Math.Floor((info.AA + (1.5 * intercept) + improvementBonus) * Math.Sqrt(this.WorkingCount) + this.Plane.GetBonus() + ex);
             }
         }
 
@@ -82,25 +87,23 @@ namespace LandBasedAirCorpsPlugin.Models
 
         private double GetImprovementBonus(SlotItem slotItem)
         {
-            double correction;
             switch (slotItem.Info.Type)
             {
                 case SlotItemType.艦上戦闘機:
                 case SlotItemType.水上戦闘機:
                 case SlotItemType.局地戦闘機:
-                    correction = 0.2;
-                    break;
+                    return 0.2 * slotItem.Level;
                 case SlotItemType.艦上爆撃機:
-                case SlotItemType.艦上攻撃機:
+                    return (slotItem.Info.Id == 60 && slotItem.Info.Name == "零式艦戦62型(爆戦)") ||
+                           (slotItem.Info.Id == 154 && slotItem.Info.Name == "零戦62型(爆戦/岩井隊)") ||
+                           (slotItem.Info.Id == 219 && slotItem.Info.Name == "零式艦戦63型(爆戦)") ?
+                                0.25 * slotItem.Level : 0;
                 case SlotItemType.陸上攻撃機:
-                    correction = 0.25;
-                    break;
+                case SlotItemType.大型陸上機:
+                    return 0.5 * Math.Sqrt(slotItem.Level);
                 default:
-                    correction = 0;
-                    break;
-            }
-
-            return slotItem.Level * correction;
+                    return 0;
+            }            
         }
 
         public override string ToString()
