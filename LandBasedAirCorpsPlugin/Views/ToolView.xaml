@@ -62,7 +62,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -103,96 +103,98 @@
 
         <ScrollViewer Grid.Row="2"
                       Grid.ColumnSpan="2"
-                      HorizontalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Auto"
                       PanningMode="Both"
-                      Margin="0,5">
-            <StackPanel Orientation="Horizontal"
-                        DataContext="{Binding SelectedFleet, Mode=OneWay}">
-                <ItemsControl ItemsSource="{Binding Regiments, Mode=OneWay}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Rows="1"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="{x:Type viewmodels:AirRegimentViewModel}">
-                            <Border x:Name="Outline" 
+                      DataContext="{Binding SelectedFleet, Mode=OneWay}">
+            <ItemsControl ItemsSource="{Binding Regiments, Mode=OneWay}"
+                              Grid.IsSharedSizeScope="True">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:AirRegimentViewModel}">
+                        <Border x:Name="Outline" 
                                     BorderBrush="{DynamicResource BorderBrushKey}"
                                     BorderThickness=".99"
-                                    Margin="5,0">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
+                                    Margin="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="shared" />
+                                </Grid.ColumnDefinitions>
 
-                                    <Border x:Name="Header"
+                                <Border x:Name="Header"
                                             Background="{DynamicResource BorderBrushKey}">
-                                        <TextBlock Style="{DynamicResource HeaderTextStyleKey}"
+                                    <TextBlock Style="{DynamicResource HeaderTextStyleKey}"
                                                    Padding="2,4,0,4.99">
                                             <Run Text="{Binding Name, Mode=OneWay}"/>
                                             <Run Text=":"/>
                                             <Run Text="{Binding BehaviorText, Mode=OneWay}"
                                                  FontSize="12.5"/>
-                                        </TextBlock>
-                                    </Border>
+                                    </TextBlock>
+                                </Border>
 
-                                    <Grid Grid.Row="1" Margin="5,0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
+                                <Grid Grid.Row="1" Margin="5,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
 
-                                        <ItemsControl Grid.Row="0"
+                                    <ItemsControl Grid.Row="0"
                                                       Margin="0,5,0,0"
                                                       ItemsSource="{Binding Squadrons, Mode=OneWay}"
                                                       Grid.IsSharedSizeScope="True">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate DataType="{x:Type viewmodels:SquadronViewModel}">
-                                                    <StackPanel>
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto"
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate DataType="{x:Type viewmodels:SquadronViewModel}">
+                                                <StackPanel>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"
                                                                                   SharedSizeGroup="Icon"/>
-                                                                <ColumnDefinition Width="*"
+                                                            <ColumnDefinition Width="*"
                                                                                   SharedSizeGroup="Name"/>
-                                                            </Grid.ColumnDefinitions>
+                                                        </Grid.ColumnDefinitions>
 
-                                                            <Grid>
-                                                                <kcvc:SlotItemIcon Type="{Binding Squadron.Plane.Info.IconType}"
+                                                        <Grid>
+                                                            <kcvc:SlotItemIcon Type="{Binding Squadron.Plane.Info.IconType}"
                                                                                    Margin="3,0"/>
-                                                                <controls:ItemProficiencyBadge Proficiency="{Binding Squadron.Plane.Proficiency}"
+                                                            <controls:ItemProficiencyBadge Proficiency="{Binding Squadron.Plane.Proficiency}"
                                                                                                VerticalAlignment="Top"
                                                                                                HorizontalAlignment="Right"
                                                                                                Panel.ZIndex="1"/>
-                                                                <controls:ItemLevelTag LevelText="{Binding Squadron.Plane.LevelText}"
+                                                            <controls:ItemLevelTag LevelText="{Binding Squadron.Plane.LevelText}"
                                                                                        VerticalAlignment="Bottom"
                                                                                        HorizontalAlignment="Right"
                                                                                        Panel.ZIndex="1"/>
-                                                            </Grid>
+                                                        </Grid>
 
-                                                            <Grid Grid.Column="1"
+                                                        <Grid Grid.Column="1"
                                                                   Margin="2,0,0,0">
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition/>
-                                                                    <RowDefinition Height="Auto"/>
-                                                                </Grid.RowDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition/>
+                                                                <RowDefinition Height="Auto"/>
+                                                            </Grid.RowDefinitions>
 
-                                                                <TextBlock Text="{Binding Squadron.Name, Mode=OneWay}"
+                                                            <TextBlock Text="{Binding Squadron.Name, Mode=OneWay}"
                                                                            Style="{DynamicResource EmphaticTextStyleKey}"/>
 
-                                                                <Grid Grid.Row="1">
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="Auto"
+                                                            <Grid Grid.Row="1">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"
                                                                                           SharedSizeGroup="Count"/>
-                                                                        <ColumnDefinition Width="Auto"
+                                                                    <ColumnDefinition Width="Auto"
                                                                                           SharedSizeGroup="Distance"/>
-                                                                        <ColumnDefinition Width="Auto"
+                                                                    <ColumnDefinition Width="Auto"
                                                                                           SharedSizeGroup="Condition"/>
-                                                                    </Grid.ColumnDefinitions>
-                                                                    <TextBlock x:Name="CountText">
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock x:Name="CountText">
                                                                         <Run Text="稼働機:"
                                                                          Style="{DynamicResource DefaultTextElementStyleKey}"
                                                                          FontSize="11"/>
@@ -205,9 +207,9 @@
                                                                         <Run Text="{Binding Squadron.DeploymentCount, Mode=OneWay}"
                                                                              Style="{DynamicResource DefaultTextElementStyleKey}"
 />
-                                                                    </TextBlock>
+                                                                </TextBlock>
 
-                                                                    <TextBlock x:Name="DistanceText"
+                                                                <TextBlock x:Name="DistanceText"
                                                                                Grid.Column="1"
                                                                                Margin="7,0,0,0">
                                                                     <Run Text="行動半径:"
@@ -216,61 +218,61 @@
                                                                     <Run Text="{Binding Squadron.Distance, Mode=OneWay}"
                                                                          Style="{DynamicResource EmphaticTextElementStyleKey}"
                                                                          FontSize="14"/>
-                                                                    </TextBlock>
+                                                                </TextBlock>
 
-                                                                    <Grid x:Name="RelocatingPanel" 
+                                                                <Grid x:Name="RelocatingPanel" 
                                                                           Grid.Row="1"
                                                                           Grid.Column="0"
                                                                           Grid.ColumnSpan="2"
                                                                           Visibility="Collapsed">
-                                                                        <Border Background="{DynamicResource FleetRepairingBrushKey}"
+                                                                    <Border Background="{DynamicResource FleetRepairingBrushKey}"
                                                                                 Opacity=".4"/>
-                                                                        <TextBlock Text="配置転換中"
+                                                                    <TextBlock Text="配置転換中"
 												                                   Style="{DynamicResource EmphaticTextStyleKey}"
                                                                                    FontSize="12"
 												                                   HorizontalAlignment="Center" 
                                                                                    VerticalAlignment="Stretch"
                                                                                    Margin="0,1,0,0"/>
-                                                                    </Grid>
                                                                 </Grid>
                                                             </Grid>
                                                         </Grid>
-                                                        <Rectangle Height=".99"
+                                                    </Grid>
+                                                    <Rectangle Height=".99"
                                                                    Margin="0,5"
                                                                    Style="{DynamicResource SeparatorRectangleStyleKey}"/>
-                                                    </StackPanel>
-                                                    <DataTemplate.Triggers>
-                                                        <DataTrigger Binding="{Binding Squadron.State, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Relocating}"
+                                                </StackPanel>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding Squadron.State, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Relocating}"
                                                                      Value="True">
-                                                            <Setter TargetName="RelocatingPanel"
+                                                        <Setter TargetName="RelocatingPanel"
                                                                     Property="Visibility"
                                                                     Value="Visible"/>
-                                                            <Setter TargetName="CountText"
+                                                        <Setter TargetName="CountText"
                                                                     Property="Opacity"
                                                                     Value=".2"/>
-                                                            <Setter TargetName="DistanceText"
+                                                        <Setter TargetName="DistanceText"
                                                                     Property="Opacity"
                                                                     Value=".2"/>
-                                                        </DataTrigger>
-                                                    </DataTemplate.Triggers>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
 
-                                        <Grid Grid.Row="2"
+                                    <Grid Grid.Row="2"
                                               Margin="0,0,0,5">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
 
-                                            <TextBlock Style="{DynamicResource DefaultTextStyleKey}">
+                                        <TextBlock Style="{DynamicResource DefaultTextStyleKey}">
                                                 <Run Text="航空隊行動半径"/>
                                                 <Run Text=":"/>
                                                 <Run Text="{Binding Distance, Mode=OneWay}"/>
-                                            </TextBlock>
+                                        </TextBlock>
 
-                                            <TextBlock Grid.Row="1"
+                                        <TextBlock Grid.Row="1"
                                                        Style="{DynamicResource DefaultTextStyleKey}">
                                                 <Run>
                                                     <Run.Style>
@@ -292,16 +294,15 @@
                                                 </Run>
                                                 <Run Text=":"/>
                                                 <Run Text="{Binding AirSuperiority, Mode=OneWay}"/>
-                                            </TextBlock>
+                                        </TextBlock>
 
-                                        </Grid>
                                     </Grid>
                                 </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
     </Grid>
 </UserControl>
