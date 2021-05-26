@@ -8,10 +8,25 @@ namespace LandBasedAirCorpsPlugin.Models
 {
     public enum AirRegimentBehavior
     {
+        /// <summary>
+        /// 待機。
+        /// </summary>
         Standby,
+        /// <summary>
+        /// 出撃。
+        /// </summary>
         Sortie,
+        /// <summary>
+        /// 防空。
+        /// </summary>
         Defense,
+        /// <summary>
+        /// 退避。
+        /// </summary>
         Retreat,
+        /// <summary>
+        /// 休息。
+        /// </summary>
         Rest
     }
 
