@@ -85,17 +85,12 @@ namespace LandBasedAirCorpsPlugin.Models
         {
             get
             {
-                if (this.Behavior == AirRegimentBehavior.Defense)
-                {
-                    var bonus = this.Squadrons
-                        .Where(x => x.State == SquadronState.Deployed)
-                        .MaxByViewRange()
-                        .GetSurveillanceBonus();
-
-                    return Math.Floor(this.Squadrons.Select(x => x.AirSuperiorityAtDefense).Sum() * bonus);
-                }
-
-                return this.Squadrons.Select(x => x.AirSuperiorityAtSortie).Sum();
+                var bonus = this.Squadrons
+                    .Where(x => x.State == SquadronState.Deployed)
+                    .MaxByViewRange()
+                    .GetSurveillanceBonus(this.Behavior);
+                
+                return Math.Floor(this.Squadrons.Select(x => x.GetAirSuperiority(this.Behavior)).Sum() * bonus);
             }
         }
 

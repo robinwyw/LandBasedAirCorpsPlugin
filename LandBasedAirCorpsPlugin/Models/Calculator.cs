@@ -78,26 +78,36 @@ namespace LandBasedAirCorpsPlugin.Models
                  : null;
         }
 
-        public static double GetSurveillanceBonus(this Squadron squadron)
+        public static double GetSurveillanceBonus(this Squadron squadron, AirRegimentBehavior behavior)
         {
             if (squadron == null) return 1;
 
             var info = squadron.Plane.Info;
-            if (info.Type == SlotItemType.艦上偵察機)
+            if (behavior == AirRegimentBehavior.Defense)
             {
-                return info.ViewRange <= 7 ? 1.2 : 1.3;
-            }
-            else if(info.Type == SlotItemType.大型飛行艇 || info.Type == SlotItemType.水上偵察機)
-            {
-                return info.ViewRange <= 7 ? 1.1
-                 : info.ViewRange == 8 ? 1.13
-                 : 1.16;
+                if (info.Type == SlotItemType.艦上偵察機)
+                {
+                    return info.ViewRange <= 7 ? 1.2 : 1.3;
+                }
+                else if (info.Type == SlotItemType.大型飛行艇 || info.Type == SlotItemType.水上偵察機)
+                {
+                    return info.ViewRange <= 7 ? 1.1
+                     : info.ViewRange == 8 ? 1.13
+                     : 1.16;
+                }
+                else
+                {
+                    return info.ViewRange == 8 ? 1.18 : 1.23;
+                }
             }
             else
             {
-                return 1.18;
+                if (info.Type == SlotItemType.陸上偵察機)
+                {
+                    return info.ViewRange == 8 ? 1.15 : 1.18;
+                }
+                return 1;
             }
-            
         }
     }
 }
