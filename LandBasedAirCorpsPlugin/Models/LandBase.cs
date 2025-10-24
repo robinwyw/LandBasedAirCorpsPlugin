@@ -60,23 +60,23 @@ namespace LandBasedAirCorpsPlugin.Models
             var proxy = KanColleClient.Current.Proxy;
 
             proxy.ApiSessionSource
-                .Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/mapinfo")
+                .Where(x =>new Uri(x.HttpClient.Request.Url).PathAndQuery == "/kcsapi/api_get_member/mapinfo")
                 .TryParse<kcsapi_mapinfo>()
                 .Subscribe(x => this.Update(x.Data));
             proxy.ApiSessionSource
-                .Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_air_corps/change_name")
+                .Where(x =>new Uri(x.HttpClient.Request.Url).PathAndQuery == "/kcsapi/api_req_air_corps/change_name")
                 .TryParse()
                 .Subscribe(this.ChangeName);
             proxy.ApiSessionSource
-                .Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_air_corps/set_action")
+                .Where(x => new Uri(x.HttpClient.Request.Url).PathAndQuery == "/kcsapi/api_req_air_corps/set_action")
                 .TryParse()
                 .Subscribe(this.UpdateBehavior);
             proxy.ApiSessionSource
-                .Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_air_corps/supply")
+                .Where(x => new Uri(x.HttpClient.Request.Url).PathAndQuery == "/kcsapi/api_req_air_corps/supply")
                 .TryParse()
                 .Subscribe(this.Supply);
             proxy.ApiSessionSource
-                .Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_air_corps/set_plane")
+                .Where(x => new Uri(x.HttpClient.Request.Url).PathAndQuery == "/kcsapi/api_req_air_corps/set_plane")
                 .TryParse<kcsapi_air_base>()
                 .Subscribe(this.UpdateSquadrons);
 
@@ -88,10 +88,10 @@ namespace LandBasedAirCorpsPlugin.Models
                 .Subscribe();
 #if DEBUG
             proxy.ApiSessionSource
-                .Where(x => x.Request.PathAndQuery.StartsWith("/kcsapi/api_req_air_corps/"))
+                .Where(x => new Uri(x.HttpClient.Request.Url).PathAndQuery.StartsWith("/kcsapi/api_req_air_corps/"))
                 .Subscribe(x =>
                 {
-                    string req = x.Request.BodyAsString;
+                    string req = x.GetRequestBodyAsString().GetAwaiter().GetResult();
                     System.Diagnostics.Debug.WriteLine(Uri.UnescapeDataString(req));
                 });
 #endif
